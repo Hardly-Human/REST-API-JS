@@ -21,6 +21,18 @@ router.get("/", (req, res, next) => {
 	);
 });
 
+router.get("/:id", (req, res, next) => {
+	pieRepo.getById(
+		req.params.id,
+		(pie) => {
+			res.status(200).json(pie);
+		},
+		(err) => {
+			next(err);
+		}
+	);
+});
+
 app.use("/api/", router);
 
 // Listen

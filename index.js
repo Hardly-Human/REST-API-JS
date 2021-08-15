@@ -9,12 +9,16 @@ const PORT = 3000;
 // Router
 const router = express.Router();
 
-// Data
-const pieData = pieRepo.get();
-
 // Routes
-router.get("/", (req, res) => {
-	res.status(200).json(pieData);
+router.get("/", (req, res, next) => {
+	pieRepo.get(
+		(data) => {
+			res.status(200).json(data);
+		},
+		(err) => {
+			next(err);
+		}
+	);
 });
 
 app.use("/api/", router);

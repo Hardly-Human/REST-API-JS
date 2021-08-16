@@ -1,5 +1,6 @@
 const { FILE } = require("dns");
 const fs = require("fs");
+const { resolve } = require("path");
 
 const FILE_NAME = "./assets/pies.json";
 
@@ -56,6 +57,30 @@ const pieRepo = {
 							resolve(newData);
 						}
 					});
+				}
+			}
+		});
+	},
+	delete: (id, resolve, reject) => {
+		fs.readFile(FILE_NAME, (err, data) => {
+			if (err) {
+				reject(err);
+			} else {
+				const pies = JSON.parse(data);
+				const index = pies.findIndex((p) => p.id == id);
+				if (index != -1) {
+					pies.splice(index, 1);
+					fs.writeFile(
+						FILE_NAME,
+						JSON.stringify(pies),
+						(err, index) => {
+							if (err) {
+								reject(err);
+							} else {
+								resolve(index);
+							}
+						}
+					);
 				}
 			}
 		});

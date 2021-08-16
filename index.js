@@ -68,6 +68,26 @@ router.put("/:id", (req, res, next) => {
 	);
 });
 
+router.delete("/:id", (req, res, next) => {
+	pieRepo.getById(req.params.id, (data) => {
+		if (data) {
+			pieRepo.delete(
+				req.params.id,
+				(data) => {
+					res.status(200).json({
+						message: "Deleted Successfully",
+					});
+				},
+				(err) => next(err)
+			);
+		} else {
+			res.status(404).json({
+				message: "NOT_FOUND",
+			});
+		}
+	});
+});
+
 app.use("/api/", router);
 
 // Listen

@@ -50,6 +50,24 @@ router.post("/", (req, res, next) => {
 	);
 });
 
+router.put("/:id", (req, res, next) => {
+	pieRepo.getById(
+		req.params.id,
+		(data) => {
+			if (data) {
+				pieRepo.update(req.body, req.params.id, (data) => {
+					res.status(200).json(data);
+				});
+			} else {
+				res.status(404).json({
+					message: "NOT_FOUND",
+				});
+			}
+		},
+		(err) => next(err)
+	);
+});
+
 app.use("/api/", router);
 
 // Listen

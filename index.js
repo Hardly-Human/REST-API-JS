@@ -1,8 +1,8 @@
 // Imports
 const express = require("express");
-const errorHelpers = require("./helper/errorHelper.js");
 const pieRepo = require("./repos/pie.repo.js");
 const errorHelper = require("./helper/errorHelper.js");
+const cors = require("cors");
 // App
 const app = express();
 const PORT = 3000;
@@ -11,6 +11,8 @@ const PORT = 3000;
 const router = express.Router();
 
 app.use(express.json());
+app.use(cors());
+
 // Routes
 router.get("/", (req, res, next) => {
 	pieRepo.get(

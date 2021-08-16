@@ -5,7 +5,7 @@ const errorHelper = require("./helper/errorHelper.js");
 const cors = require("cors");
 // App
 const app = express();
-const PORT = 3000;
+const PORT = 5000;
 
 // Router
 const router = express.Router();

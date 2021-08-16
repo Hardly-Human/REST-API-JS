@@ -1,8 +1,6 @@
-const { FILE } = require("dns");
 const fs = require("fs");
-const { resolve } = require("path");
 
-const FILE_NAME = "./assets/pies.json";
+const FILE_NAME = "./assets/pie.json";
 
 const pieRepo = {
 	get: (resolve, reject) => {

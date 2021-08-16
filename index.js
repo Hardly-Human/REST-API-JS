@@ -1,7 +1,8 @@
 // Imports
 const express = require("express");
+const errorHelpers = require("./helper/errorHelper.js");
 const pieRepo = require("./repos/pie.repo.js");
-
+const errorHelper = require("./helper/errorHelper.js");
 // App
 const app = express();
 const PORT = 3000;
@@ -89,6 +90,10 @@ router.delete("/:id", (req, res, next) => {
 });
 
 app.use("/api/", router);
+
+app.use(errorHelper.logErrors);
+app.use(errorHelper.clientErrorHandler);
+app.use(errorHelper.errorHandler);
 
 // Listen
 app.listen(PORT, () => {
